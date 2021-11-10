@@ -23,20 +23,23 @@ const App = () => {
   }, [list, currentMonth]);
 
   useEffect(() => {
-
-    let TotalIncome = 0;
-    let TotalExpense = 0;
-    for (let i in filteredList) {
-      if (categories[filteredList[i].category].expense) {
-        TotalExpense += filteredList[i].value;
-      } else {
-        TotalIncome += filteredList[i].value;
+    const handleSetData = () => {
+      let TotalIncome = 0;
+      let TotalExpense = 0;
+      for (let i in filteredList) {
+        if (categories[filteredList[i].category].expense) {
+          TotalExpense += filteredList[i].value;
+        } else {
+          TotalIncome += filteredList[i].value;
+        }
       }
+
+      setIncome(TotalIncome);
+      setExpense(TotalExpense);
     }
 
-    setIncome(TotalIncome);
-    setExpense(TotalExpense);
-  })
+    handleSetData()
+  }, [list, filteredList])
 
   return (
     <Container>
